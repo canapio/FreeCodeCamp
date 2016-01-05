@@ -67,9 +67,9 @@ block content
                         .spacer
                     if isFrontEndCert
                         a.btn.btn-primary(href='/' + username + '/front-end-certification') View My Front End Development Certification
-                    if isFullStackCert
+                    if isBackEndCert
                         .button-spacer
-                        a.btn.btn-success(href='/' + username + '/full-stack-certification') View My Full Stack Development Certification
+                        a.btn.btn-success(href='/' + username + '/back-end-certification') View My Back End Development Certification
                     //if (user && user.username !== username)
                     //    a.btn.btn-lg.btn-block.btn-twitter.btn-link-social(href='/leaderboard/add?username=#{username}')
                     //        i.fa.fa-plus-square
@@ -119,8 +119,8 @@ block content
                     .row
                         .hidden-xs.col-sm-12.text-center
                             .row.text-primary
-                              h4.col-sm-6.text-right Longest Streak: #{longestStreak} #{longestStreak + longestStreak === 1 ? ' day' : ' days'}
-                                h4.col-sm-6.text-left Current Streak: #{currentStreak} #{currentStreak + currentStreak === 1 ? ' day' : ' days'}
+                                h4.col-sm-6.text-right Longest Streak: #{longestStreak} #{longestStreak === 1 ? ' day' : ' days'}
+                                h4.col-sm-6.text-left Current Streak: #{currentStreak} #{currentStreak === 1 ? ' day' : ' days'}
 
 
                     if (user && user.username == username || !isLocked)
@@ -195,12 +195,16 @@ block content
                     .col-xs-12
                         a.btn.btn-lg.btn-block.btn-info.btn-link-social(href='/toggle-lockdown-mode')
                             span.ion-locked
-                            | Hide all my solutions from other people
+                            | Hide all my solutions from other people 
+                            br
+                            | (this will disable your certificates)
                 else
                     .col-xs-12
                         a.btn.btn-lg.btn-block.btn-info.btn-link-social(href='/toggle-lockdown-mode')
                             span.ion-unlocked
                             | Let other people see all my solutions
+                            br              
+                            | (this will enable your certificates)
                 .col-xs-12
                     a.btn.btn-lg.btn-block.btn-success.btn-link-social(href='/commit')
                         span.ion-edit
@@ -228,10 +232,10 @@ block content
                             .modal-footer
                                 a.btn.btn-success.btn-block(href='#', data-dismiss='modal', aria-hidden='true')
                                     span.ion-happy
-                                    | Nevermind, I don't want to delete all my progress
-                                .btn-spacer
+                                    | Nevermind, I don't want to delete all of my progress
+                                .spacer
                                 form(action='/account/delete', method='POST')
                                     input(type='hidden', name='_csrf', value=_csrf)
                                     button.btn.btn-danger.btn-block(type='submit')
                                         span.ion-trash-b
-                                        | I am 100% sure I want to delete all my progress
+                                        | I am 100% sure I want to delete my account and all of my progress
