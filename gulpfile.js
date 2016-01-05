@@ -39,8 +39,11 @@ var Rx = require('rx'),
 
   // lint
   jsonlint = require('gulp-jsonlint'),
-  eslint = require('gulp-eslint');
-
+  eslint = require('gulp-eslint'),
+  
+  // unit-tests
+  tape = require('gulp-tape'),
+  tapSpec = require('tap-spec');
 
 Rx.config.longStackSupport = true;
 
@@ -142,7 +145,7 @@ var paths = {
   ],
 
   challenges: [
-    'seed/challenges/*.json'
+    'seed/challenges/*/*.json'
   ]
 };
 
@@ -533,3 +536,10 @@ gulp.task('default', [
   'watch',
   'sync'
 ]);
+
+gulp.task('test', function() {
+  return gulp.src('test/**/*.js')
+    .pipe(tape({
+      reporter: tapSpec()
+    }));
+});

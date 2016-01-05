@@ -35,7 +35,7 @@ $(document).ready(function() {
       .flatMap(code => {
         return common.detectUnsafeCode$(code)
           .map(() => {
-            const combinedCode = common.head + code + common.tail;
+            const combinedCode = common.head + '\n;;' + code + '\n;;' + common.tail;
 
             return addLoopProtect(combinedCode);
           })
@@ -72,6 +72,7 @@ $(document).ready(function() {
           return common.updateOutputDisplay('' + err);
         }
         common.codeStorage.updateStorage(challengeName, originalCode);
+        common.codeUri.querify(originalCode);
         common.updateOutputDisplay('' + output);
       },
       (err) => {
